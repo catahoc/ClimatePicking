@@ -19,7 +19,7 @@ namespace ClimatePicking.Endpoint
             
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
-            container.RegisterType<ClimateContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<ClimateContext>(new ContainerControlledLifetimeManager());
             container.RegisterType<IModelsConverter, ModelsConverter>(new ContainerControlledLifetimeManager());
         }
     }

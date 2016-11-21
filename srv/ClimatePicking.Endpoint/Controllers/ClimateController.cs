@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ClimatePicking.Domain;
 using ClimatePicking.Endpoint.Models;
 
 namespace ClimatePicking.Endpoint.Controllers
 {
+    [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
     public class ClimateController : ApiController
     {
         private readonly ClimateContext context;
@@ -24,6 +26,15 @@ namespace ClimatePicking.Endpoint.Controllers
 
 
             return Json(new { baseCity, quotedCity });
+        }
+
+        [HttpGet]
+        public object Cities()
+        {
+            var cities = context.Cities.ToArray().Select(converter.ToDto);
+
+
+            return Json(cities);
         }
     }
 }

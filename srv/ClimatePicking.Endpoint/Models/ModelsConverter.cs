@@ -9,6 +9,7 @@ namespace ClimatePicking.Endpoint.Models
         {
             return new CityDto
             {
+                Id = city.Id,
                 Name = city.Name,
                 Capital = city.IsCapital,
                 Entries = city.Climates.FirstOrDefault()?.Records?.ToArray().Select(ToDto).ToArray()

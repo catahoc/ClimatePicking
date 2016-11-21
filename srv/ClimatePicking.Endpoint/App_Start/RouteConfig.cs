@@ -15,8 +15,7 @@ namespace ClimatePicking.Endpoint
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Climate", action = "CompareTemp", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}"
             );
         }
     }
