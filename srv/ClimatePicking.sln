@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimatePicking.DataRetriever", "ClimatePicking.DataRetriever\ClimatePicking.DataRetriever.csproj", "{561F379D-FDB6-4169-8FBC-36A20545E8F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimatePicking.Domain", "ClimatePicking.Domain\ClimatePicking.Domain.csproj", "{774B10FF-A0B4-4CF9-BEC8-C5F2404C2BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimatePicking.Endpoint", "ClimatePicking.Endpoint\ClimatePicking.Endpoint.csproj", "{159C6E36-9E68-4DB7-A884-B56331AFD175}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{561F379D-FDB6-4169-8FBC-36A20545E8F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561F379D-FDB6-4169-8FBC-36A20545E8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561F379D-FDB6-4169-8FBC-36A20545E8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561F379D-FDB6-4169-8FBC-36A20545E8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{774B10FF-A0B4-4CF9-BEC8-C5F2404C2BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774B10FF-A0B4-4CF9-BEC8-C5F2404C2BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774B10FF-A0B4-4CF9-BEC8-C5F2404C2BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774B10FF-A0B4-4CF9-BEC8-C5F2404C2BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159C6E36-9E68-4DB7-A884-B56331AFD175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159C6E36-9E68-4DB7-A884-B56331AFD175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159C6E36-9E68-4DB7-A884-B56331AFD175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159C6E36-9E68-4DB7-A884-B56331AFD175}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
