@@ -3,8 +3,11 @@
  */
 require.config({
     paths: {
-        'jquery': 'util/jquery'
+        'jquery': 'util/jquery',
+        'jquery-ui': 'util/jquery-ui',
+        'Chart': 'util/Chart'
     },
+    urlArgs: "bust=" + (new Date()).getTime(),
 
     shim: {
         jquery: {
@@ -14,16 +17,47 @@ require.config({
 
 });
 
-requirejs(["jquery", "server", "renderer"], function($, server, renderer) {
+requirejs(["config", "server", "renderer", "dom", "Chart", "jquery", "jquery-ui"], function(config, server, renderer, dom, Chart, $) {
     $(function(){
-        renderer.renderWaiting();
-        server.getCities(function(cities){
-            renderer.renderCities(cities);
-        }, function(ex){
-            renderer.renderError(ex);
+        var selected = {
+            left: false,
+            leftName: '',
+            right: false,
+            rightName: ''
+        };
+        var startCompare = function(){
+            server.compareTemp(selected.leftName, selected.rightName, function(response){
+                var chart = new Chart(dom.canvas, {
+                    type: 'bar',
+                    data: response
+                });
+            });
+        };
+        dom.leftCity.autocomplete({
+            source: config.searchCities,
+            minLength: 2,
+            delay: 300,
+            select : function(data, value) {
+                selected.left = true;
+                selected.leftName = value.item.value;
+                if(selected.right){
+                    startCompare();
+                }
+            }
         });
-        // server.compareTemp(function(baseCity, quotedCity){
-        //     renderer.renderCities();
-        // });
+        dom.rightCity.autocomplete({
+            source: config.searchCities,
+            minLength: 2,
+            delay: 300,
+            select : function(data, value) {
+                selected.right = true;
+                selected.rightName = value.item.value;
+                if(selected.left){
+                    startCompare();
+                }
+            }
+        });
+
+
     });
 });

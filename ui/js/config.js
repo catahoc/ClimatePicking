@@ -5,8 +5,10 @@ define(function () {
     var endpoint = 'http://localhost:9921';
     var compareTempAppendix = 'api/Climate/CompareTemp';
     var getCitiesAppendix = 'api/Climate/Cities';
+    var findCitiesAppendix = 'api/Climate/FindCities';
     return {
         compareTemp: endpoint + '/' + compareTempAppendix,
-        getCities: endpoint + '/' + getCitiesAppendix
+        getCities: endpoint + '/' + getCitiesAppendix,
+        searchCities: endpoint + '/' + findCitiesAppendix
     };
 });

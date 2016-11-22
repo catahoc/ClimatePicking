@@ -10,6 +10,6 @@ namespace ClimatePicking.Domain
 
         public City TargetCity { get; set; }
 
-        public ICollection<CityClimateRecord> Records { get; set; }
+        public virtual ICollection<CityClimateRecord> Records { get; set; }
     }
 }

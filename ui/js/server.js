@@ -3,9 +3,13 @@
  */
 define(["config", "jquery"], function (config, $) {
     return {
-        compareTemp: function(callback){
-            $.getJSON(config.compareTemp, function(response){
-                callback(response.baseCity, response.quotedCity);
+        compareTemp: function(baseCity, quotedCity, callback){
+            var args = {
+                baseCity: baseCity,
+                quotedCity: quotedCity
+            };
+            $.getJSON(config.compareTemp, args, function(response){
+                callback(response);
             });
         },
         getCities: function(callback, fail){

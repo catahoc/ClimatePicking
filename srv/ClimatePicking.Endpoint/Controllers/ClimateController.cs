@@ -24,8 +24,23 @@ namespace ClimatePicking.Endpoint.Controllers
             var baseCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == baseCityName));
             var quotedCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == quotedCityName));
 
-
-            return Json(new { baseCity, quotedCity });
+            return Json(new
+            {
+                labels = baseCity.Entries.Select(x => x.Month).ToArray(),
+                datasets = new[]
+                {
+                    new
+                    {
+                        label = baseCityName,
+                        data = baseCity.Entries.Select(x => x.AvgMin).ToArray()
+                    },
+                    new
+                    {
+                        label = quotedCityName,
+                        data = quotedCity.Entries.Select(x => x.AvgMin).ToArray()
+                    },
+                }
+            });
         }
 
         [HttpGet]
@@ -33,6 +48,14 @@ namespace ClimatePicking.Endpoint.Controllers
         {
             var cities = context.Cities.ToArray().Select(converter.ToDto);
 
+
+            return Json(cities);
+        }
+
+        [HttpGet]
+        public object FindCities(string term)
+        {
+            var cities = context.Cities.Where(x => x.Name.StartsWith(term)).Select(x => x.Name).ToArray();
 
             return Json(cities);
         }
