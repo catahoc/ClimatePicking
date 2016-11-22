@@ -19,7 +19,7 @@ namespace ClimatePicking.Endpoint.Controllers
         }
 
         [HttpGet]
-        public object CompareTemp(string baseCityName = "Moscow", string quotedCityName = "London")
+        public object CompareTemp(string baseCityName, string quotedCityName)
         {
             var baseCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == baseCityName));
             var quotedCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == quotedCityName));

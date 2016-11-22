@@ -5,8 +5,8 @@ define(["config", "jquery"], function (config, $) {
     return {
         compareTemp: function(baseCity, quotedCity, callback){
             var args = {
-                baseCity: baseCity,
-                quotedCity: quotedCity
+                baseCityName: baseCity,
+                quotedCityName: quotedCity
             };
             $.getJSON(config.compareTemp, args, function(response){
                 callback(response);
