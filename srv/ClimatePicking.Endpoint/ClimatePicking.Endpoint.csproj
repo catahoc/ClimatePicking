@@ -221,7 +221,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Models\CityDto.cs" />
     <Compile Include="Models\ClimateEntry.cs" />
+    <Compile Include="Models\IDataSource.cs" />
     <Compile Include="Models\IModelsConverter.cs" />
+    <Compile Include="Models\JsonDataSource.cs" />
     <Compile Include="Models\ModelsConverter.cs" />
     <Compile Include="Models\CountryDto.cs" />
     <Compile Include="Controllers\ClimateController.cs" />
@@ -253,6 +255,11 @@
       <Project>{774b10ff-a0b4-4cf9-bec8-c5f2404c2bea}</Project>
       <Name>ClimatePicking.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

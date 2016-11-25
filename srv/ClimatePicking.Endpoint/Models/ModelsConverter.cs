@@ -11,6 +11,7 @@ namespace ClimatePicking.Endpoint.Models
             {
                 Id = city.Id,
                 Name = city.Name,
+                Country = city.Country.Name,
                 Capital = city.IsCapital,
                 Entries = city.Climates.FirstOrDefault()?.Records?.ToArray().OrderBy(x => x.MonthIndex).Select(ToDto).ToArray()
             };

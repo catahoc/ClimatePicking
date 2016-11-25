@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ClimatePicking.Domain;
@@ -9,10 +10,10 @@ namespace ClimatePicking.Endpoint.Controllers
     [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
     public class ClimateController : ApiController
     {
-        private readonly ClimateContext context;
+        private readonly IDataSource context;
         private readonly IModelsConverter converter;
 
-        public ClimateController(ClimateContext context, IModelsConverter converter)
+        public ClimateController(IDataSource context, IModelsConverter converter)
         {
             this.context = context;
             this.converter = converter;
@@ -21,8 +22,8 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpGet]
         public object CompareTemp(string baseCityName, string quotedCityName)
         {
-            var baseCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == baseCityName));
-            var quotedCity = converter.ToDto(context.Cities.SingleOrDefault(x => x.Name == quotedCityName));
+            var baseCity = context.Cities.SingleOrDefault(x => x.Name == baseCityName);
+            var quotedCity = context.Cities.SingleOrDefault(x => x.Name == quotedCityName);
 
             return Json(new
             {
@@ -46,7 +47,7 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpGet]
         public object Cities()
         {
-            var cities = context.Cities.ToArray().Select(converter.ToDto);
+            var cities = context.Cities;
 
 
             return Json(cities);
@@ -55,7 +56,7 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpGet]
         public object FindCities(string term)
         {
-            var cities = context.Cities.Where(x => x.Name.StartsWith(term)).Select(x => x.Name).ToArray();
+            var cities = context.Cities.Where(x => x.Name.StartsWith(term, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Name).ToArray();
 
             return Json(cities);
         }
