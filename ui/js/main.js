@@ -17,8 +17,9 @@ require.config({
 
 });
 
-requirejs(["config", "server", "renderer", "dom", "Chart", "jquery", "jquery-ui"], function(config, server, renderer, dom, Chart, $) {
+requirejs(["config", "server", "renderer", "dom", "Chart", "climate-colors", "jquery", "jquery-ui"], function(config, server, renderer, dom, Chart, climateColors, $) {
     $(function(){
+        var chart;
         var selected = {
             left: false,
             leftName: '',
@@ -27,7 +28,11 @@ requirejs(["config", "server", "renderer", "dom", "Chart", "jquery", "jquery-ui"
         };
         var startCompare = function(){
             server.compareTemp(selected.leftName, selected.rightName, function(response){
-                var chart = new Chart(dom.canvas, {
+                climateColors.enrichResponse(response);
+                if(chart != undefined){
+                    chart.removeData();
+                }
+                chart = new Chart(dom.canvas, {
                     type: 'bar',
                     data: response
                 });
@@ -58,6 +63,6 @@ requirejs(["config", "server", "renderer", "dom", "Chart", "jquery", "jquery-ui"
             }
         });
 
-
+        dom.leftCity
     });
 });

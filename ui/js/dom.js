@@ -6,6 +6,7 @@ define(["jquery"], function ($) {
         leftCity: $('#leftCity'),
         rightCity: $('#rightCity'),
         midPane: $('.midPane'),
-        canvas: $('#weatherCompareChart')
+        canvas: $('#weatherCompareChart'),
+        canvasMarkup: '<canvas id="weatherCompareChart"></canvas>'
     };
 });
