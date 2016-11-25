@@ -7,7 +7,7 @@ using ClimatePicking.Endpoint.Models;
 
 namespace ClimatePicking.Endpoint.Controllers
 {
-    [EnableCors(origins: "http://localhost:63342", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://192.168.1.33:20800", headers: "*", methods: "*")]
     public class ClimateController : ApiController
     {
         private readonly IDataSource context;
