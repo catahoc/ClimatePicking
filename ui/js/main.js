@@ -67,8 +67,8 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                     var cities = new ymaps.GeoObjectCollection(null);
                     cities.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
                     cities.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
-                    myMap.geoObjects.add(blueCollection);
-                    myMap.setBounds(blueCollection.getBounds());
+                    myMap.geoObjects.add(cities);
+                    myMap.setBounds(cities.getBounds());
                 });
             };
             dom.leftCity.autocomplete({
