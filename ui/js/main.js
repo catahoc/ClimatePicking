@@ -64,11 +64,9 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
 
                     // map
                     var citiesData = response.citiesData;
-                    var blueCollection = new ymaps.GeoObjectCollection(null, {
-                        preset: 'islands#blueIcon'
-                    });
-                    blueCollection.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
-                    blueCollection.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
+                    var cities = new ymaps.GeoObjectCollection(null);
+                    cities.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
+                    cities.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
                     myMap.geoObjects.add(blueCollection);
                     myMap.setBounds(blueCollection.getBounds());
                 });
