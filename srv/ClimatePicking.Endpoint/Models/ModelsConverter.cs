@@ -13,6 +13,8 @@ namespace ClimatePicking.Endpoint.Models
                 Name = city.Name,
                 Country = city.Country.Name,
                 Capital = city.IsCapital,
+                Lat = city.Lat,
+                Lon = city.Lon,
                 Entries = city.Climates.FirstOrDefault()?.Records?.ToArray().OrderBy(x => x.MonthIndex).Select(ToDto).ToArray()
             };
         }

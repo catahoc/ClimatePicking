@@ -22,10 +22,10 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpGet]
         public object CompareTemp(string baseCityName, string quotedCityName)
         {
-            var baseCity = context.Cities.SingleOrDefault(x => x.Name == baseCityName);
-            var quotedCity = context.Cities.SingleOrDefault(x => x.Name == quotedCityName);
+            var baseCity = context.Cities.FirstOrDefault(x => x.Name == baseCityName);
+            var quotedCity = context.Cities.FirstOrDefault(x => x.Name == quotedCityName);
 
-            return Json(new
+            var chartData = new
             {
                 labels = baseCity.Entries.Select(x => x.Month).ToArray(),
                 datasets = new[]
@@ -41,7 +41,13 @@ namespace ClimatePicking.Endpoint.Controllers
                         data = quotedCity.Entries.Select(x => x.AvgMin).ToArray()
                     },
                 }
-            });
+            };
+            var citiesData = new
+            {
+                baseCity,
+                quotedCity
+            };
+            return Json(new { chartData, citiesData });
         }
 
         [HttpGet]

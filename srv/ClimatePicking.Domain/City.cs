@@ -15,5 +15,9 @@ namespace ClimatePicking.Domain
         public Country Country { get; set; }
 
         public virtual ICollection<CityClimate> Climates { get; set; }
+
+        public double Lon { get; set; }
+
+        public double Lat { get; set; }
     }
 }

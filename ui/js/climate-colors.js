@@ -39,11 +39,6 @@ define(["math"], function (math) {
                 }
             }
             return notFoundColor;
-        },
-        enrichResponse: function(response){
-            for(var i = 0; i < response.datasets.length; ++i){
-                response.datasets[i].backgroundColor = response.datasets[i].data.map(this.pickColor);
-            }
         }
     };
 });

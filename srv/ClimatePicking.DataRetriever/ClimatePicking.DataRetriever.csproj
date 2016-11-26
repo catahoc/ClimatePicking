@@ -62,6 +62,7 @@
     <Compile Include="api.worldweatheronline.com.cs" />
     <Compile Include="LoadClimatesScript.cs" />
     <Compile Include="LoadCountriesScript.cs" />
+    <Compile Include="LoadLonLatScript.cs" />
     <Compile Include="restcountries.eu.cs" />
     <Compile Include="Json.cs" />
     <Compile Include="Program.cs" />

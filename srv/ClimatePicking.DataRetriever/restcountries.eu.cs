@@ -11,6 +11,8 @@
 
         public string capital { get; set; }
 
+        public double[] latlng { get; set; }
+
         public int population { get; set; }
     }
 }
