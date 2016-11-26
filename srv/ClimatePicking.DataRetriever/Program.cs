@@ -13,7 +13,7 @@ namespace ClimatePicking.DataRetriever
     {
         static void Main(string[] args)
         {
-            LoadLonLatScript.Do();
+            SaveDbJson.Do();
         }
     }
 }

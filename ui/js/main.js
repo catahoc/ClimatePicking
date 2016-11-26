@@ -23,10 +23,18 @@ require.config({
 
 requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jquery-ui", "ymaps"],
     function(config, server, dom, Chart, climateColors, $, _, ymaps) {
-    var jqueryPromise = new Promise($);
-    var ymapsPromise = new Promise(ymaps.ready);
+    var jqueryPromise = new Promise(function(resolve){
+        $(resolve);
+    });
+    var ymapsPromise = new Promise(function(resolve){
+        ymaps.ready(resolve);
+    });
     Promise.all([jqueryPromise, ymapsPromise])
         .then(function(){
+            var myMap = new ymaps.Map('map', {
+                center: [55.76, 37.64],
+                zoom:2
+            });
             var chart;
             var selected = {
                 left: false,
@@ -40,8 +48,8 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                 }
                 response.scales = {yAxes: [{scaleLabel: {display: true, lavelString: '°C'}}]};
             };
-            var startCompare = function(){
-                server.compareTemp(selected.leftName, selected.rightName, function(response){
+            var startCompareByNames = function(leftName, rightName){
+                server.compareTemp(leftName, rightName, function(response){
 
                     // chart
                     var chartData = response.chartData;
@@ -56,12 +64,13 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
 
                     // map
                     var citiesData = response.citiesData;
-                    ymaps.ready(function(){
-                        var myMap = new ymaps.Map('map', {
-                            center: [60.153151, 30.286574],
-                            zoom: 13
-                        });
+                    var blueCollection = new ymaps.GeoObjectCollection(null, {
+                        preset: 'islands#blueIcon'
                     });
+                    blueCollection.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
+                    blueCollection.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
+                    myMap.geoObjects.add(blueCollection);
+                    myMap.setBounds(blueCollection.getBounds());
                 });
             };
             dom.leftCity.autocomplete({
@@ -72,7 +81,7 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                     selected.left = true;
                     selected.leftName = value.item.value;
                     if(selected.right){
-                        startCompare();
+                        startCompareByNames(selected.leftName, selected.rightName);
                     }
                 }
             });
@@ -84,9 +93,10 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                     selected.right = true;
                     selected.rightName = value.item.value;
                     if(selected.left){
-                        startCompare();
+                        startCompareByNames(selected.leftName, selected.rightName);
                     }
                 }
             });
+            startCompareByNames('Moscow', 'London');
         });
 });

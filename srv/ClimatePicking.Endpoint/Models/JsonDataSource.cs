@@ -8,7 +8,7 @@ namespace ClimatePicking.Endpoint.Models
     {
         public JsonDataSource()
         {
-            var mapPath = HostingEnvironment.MapPath("~/data.json");
+            var mapPath = HostingEnvironment.MapPath("~/bin/data.json");
             var jsonText = File.ReadAllText(mapPath);
             Cities = Json.Decode<CityDto[]>(jsonText);
         }

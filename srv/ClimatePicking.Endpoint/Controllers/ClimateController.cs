@@ -44,10 +44,10 @@ namespace ClimatePicking.Endpoint.Controllers
             };
             var citiesData = new
             {
-                baseCity,
-                quotedCity
+                baseCity = new {baseCity.Name, latlon = new[] {baseCity.Lat, baseCity.Lon}},
+                quotedCity = new { quotedCity.Name, latlon = new[] { quotedCity.Lat, quotedCity.Lon}}
             };
-            return Json(new { chartData, citiesData });
+            return Json(new { chartData, citiesData, bounds = new[] { new[] { baseCity.Lat, baseCity.Lon } , new[] { quotedCity.Lat, quotedCity.Lon } } });
         }
 
         [HttpGet]

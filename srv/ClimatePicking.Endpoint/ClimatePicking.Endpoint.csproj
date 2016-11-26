@@ -257,7 +257,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data.json">
+    <Content Include="..\..\shared\data.json">
+      <Link>data.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
