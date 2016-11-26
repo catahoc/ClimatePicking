@@ -54,10 +54,9 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                     // chart
                     var chartData = response.chartData;
                     enrichResponse(chartData);
-                    if(chart != undefined){
-                        chart.removeData();
-                    }
-                    chart = new Chart(dom.canvas, {
+                    var canvas = $(dom.canvasMarkup);
+                    dom.canvasHolder.empty().append(canvas);
+                    var chart = new Chart(canvas, {
                         type: 'bar',
                         data: chartData
                     });
@@ -67,6 +66,7 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                     var cities = new ymaps.GeoObjectCollection(null);
                     cities.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
                     cities.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
+                    myMap.geoObjects.removeAll();
                     myMap.geoObjects.add(cities);
                     myMap.setBounds(cities.getBounds());
                 });
