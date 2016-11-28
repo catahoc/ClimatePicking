@@ -66,5 +66,31 @@ namespace ClimatePicking.Endpoint.Controllers
 
             return Json(cities);
         }
+
+        [HttpGet]
+        public object SearchInBounds(double lat1, double lon1, double lat2, double lon2, int month)
+        {
+            if (lat1 > lat2)
+            {
+                var b = lat1;
+                lat1 = lat2;
+                lat2 = b;
+            }
+            if (lon1 > lon2)
+            {
+                var b = lon1;
+                lon1 = lon2;
+                lon2 = b;
+            }
+            var matchingCities = context.Cities.Where(x => x.Lat > lat1 && x.Lat < lat2 && x.Lon > lon1 && x.Lon < lon2).Select(x =>
+                new
+                {
+                    name = x.Name,
+                    latlon = new[] {x.Lat, x.Lon},
+                    temp = x.Entries?.FirstOrDefault(y => y.MonthIndex == month)?.AvgMin
+                }).ToArray();
+
+            return Json(matchingCities);
+        }
     }
 }

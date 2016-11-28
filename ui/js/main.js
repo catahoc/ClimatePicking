@@ -5,7 +5,6 @@ require.config({
     paths: {
         'jquery': 'util/jquery',
         'jquery-ui': 'util/jquery-ui',
-        'Chart': 'util/Chart',
         'ymaps': '//api-maps.yandex.ru/2.1/?lang=ru-RU'
     },
     urlArgs: "bust=" + (new Date()).getTime(),
@@ -21,58 +20,38 @@ require.config({
 
 });
 
-requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jquery-ui", "ymaps"],
-    function(config, server, dom, Chart, climateColors, $, _, ymaps) {
-    var jqueryPromise = new Promise(function(resolve){
-        $(resolve);
-    });
-    var ymapsPromise = new Promise(function(resolve){
-        ymaps.ready(resolve);
-    });
-    Promise.all([jqueryPromise, ymapsPromise])
+requirejs(["server", "dom", "charts", "jquery", "jquery-ui", "maps", "climate-colors"],
+    function(server, dom, charts, $, _, maps, colors) {
+        let jqueryPromise = new Promise(function(resolve){
+            $(resolve);
+        });
+        Promise.all([jqueryPromise, maps.promise])
         .then(function(){
-            var myMap = new ymaps.Map('map', {
-                center: [55.76, 37.64],
-                zoom:2
-            });
-            var chart;
-            var selected = {
+            let myMap = maps.createMap('map');
+            let selected = {
                 left: false,
                 leftName: '',
                 right: false,
                 rightName: ''
             };
-            var enrichResponse = function(response){
-                for(var i = 0; i < response.datasets.length; ++i){
-                    response.datasets[i].backgroundColor = response.datasets[i].data.map(climateColors.pickColor);
-                }
-                response.scales = {yAxes: [{scaleLabel: {display: true, lavelString: '°C'}}]};
-            };
-            var startCompareByNames = function(leftName, rightName){
+            let startCompareByNames = function(leftName, rightName){
                 server.compareTemp(leftName, rightName, function(response){
 
                     // chart
-                    var chartData = response.chartData;
-                    enrichResponse(chartData);
-                    var canvas = $(dom.canvasMarkup);
-                    dom.canvasHolder.empty().append(canvas);
-                    var chart = new Chart(canvas, {
-                        type: 'bar',
-                        data: chartData
-                    });
+                    let chartData = response.chartData;
+                    let chart = charts.createChart(dom.canvasHolder);
+                    chart.render(chartData);
 
                     // map
                     var citiesData = response.citiesData;
-                    var cities = new ymaps.GeoObjectCollection(null);
-                    cities.add(new ymaps.Placemark(citiesData.baseCity.latlon, { iconCaption: citiesData.baseCity.Name}));
-                    cities.add(new ymaps.Placemark(citiesData.quotedCity.latlon, { iconCaption: citiesData.quotedCity.Name}));
-                    myMap.geoObjects.removeAll();
-                    myMap.geoObjects.add(cities);
-                    myMap.setBounds(cities.getBounds());
+                    myMap.setMarks([
+                        maps.createMark(citiesData.baseCity.latlon, citiesData.baseCity.name),
+                        maps.createMark(citiesData.quotedCity.latlon, citiesData.quotedCity.name)
+                    ], true);
                 });
             };
             dom.leftCity.autocomplete({
-                source: config.searchCities,
+                source: server.searchCities,
                 minLength: 2,
                 delay: 300,
                 select : function(data, value) {
@@ -84,7 +63,7 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                 }
             });
             dom.rightCity.autocomplete({
-                source: config.searchCities,
+                source: server.searchCities,
                 minLength: 2,
                 delay: 300,
                 select : function(data, value) {
@@ -96,5 +75,11 @@ requirejs(["config", "server", "dom", "Chart", "climate-colors", "jquery", "jque
                 }
             });
             startCompareByNames('Moscow', 'London');
+            var map2 = maps.createMap('map2');
+            map2.boundsChange(function(newBounds){
+                server.requestCities(newBounds, 1, function(cities){
+                    map2.setMarks(cities.map(x => maps.createMark(x.latlon, x.name, colors.pickColor(x.temp))), false);
+                });
+            });
         });
 });

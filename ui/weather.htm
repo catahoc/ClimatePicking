@@ -1,44 +1,36 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <script lang="javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
-    <script lang="javascript">
-        var apiKey = "08e876b9d826477c8cf205257161511";
-        var apiReplacer = "[apiKey]";
-        var cityNameReplacer = "[cityName]";
-        var apiUrl = "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=[apiKey]&q=[cityName]&num_of_days=2&tp=3&format=json".replace(apiReplacer, apiKey);
-        
-        $(function () {
-          $('#left').click(function() {
-            var cityName = $('#left-city-text').val();
-            var getClimateUrl = apiUrl.replace(cityNameReplacer, cityName);
-            $.getJSON(getClimateUrl, function(data){
-              var climateAverages = data.data.ClimateAverages[0].month;
-              $.each(climateAverages, function(index, average){
-                var table = $('#left-pane-results');
-                var cell = $('<td/>').html(average.name + ': min=' + average.avgMinTemp)
-                var row = $('<tr/>').append(cell);
-                table.append(row);
-              });
-            });
-          });
-        });
-    </script>
-  </head>
-  <body>
-    <div>
-      <div id="left-pane" >
-        City: <input type="text" value="Moscow" id="left-city-text" />
-        <button id="left">Load</button>
-        
-        <div id="left-pane-results">
-          results:
-          <table id="left-pane-table" />
-        </div>
+<head>
+  <title>Pick you fav CLIMATE</title>
+  <meta charset="utf-8">
+  <script data-main="js/main" src="js/util/require.js"></script>
+  <link rel="stylesheet" href="css/main.css" >
+  <link rel="stylesheet" href="css/jquery-ui.min.css" >
+  <link rel="stylesheet" href="css/jquery-ui.structure.min.css" >
+  <link rel="stylesheet" href="css/jquery-ui.theme.min.css" >
+</head>
+<body>
+<div id="root">
+  <header id="header">
+    Pick your favorite place for living
+  </header>
+  <div id="middle">
+    <div id="content">
+      <div class="rightPane">
+        <input title="Right city" type="text" id="rightCity" class="citySelector" placeholder="Right city" />
       </div>
-      <div id="right-pane" />
+      <div class="midPane">
+        <div id="chartHolder"></div>
+      </div>
+      <div class="leftPane">
+        <input title="Left city" type="text" id="leftCity" class="citySelector" placeholder="LeftCity" />
+      </div>
+      <div id="map" style="width: 600px; height: 400px"></div>
     </div>
-  </body>
+  </div>
+  <footer id="footer">
+    Developed by Makhov Alexander
+  </footer>
+</div>
+</body>
 </html>
