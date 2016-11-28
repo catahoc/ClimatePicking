@@ -75,11 +75,15 @@ requirejs(["server", "dom", "charts", "jquery", "jquery-ui", "maps", "climate-co
                 }
             });
             startCompareByNames('Moscow', 'London');
+
             var map2 = maps.createMap('map2');
-            map2.boundsChange(function(newBounds){
-                server.requestCities(newBounds, 1, function(cities){
-                    map2.setMarks(cities.map(x => maps.createMark(x.latlon, x.name, colors.pickColor(x.temp))), false);
+            var rebound = function(){
+                server.requestCities(map2.getBounds(), dom.monthPicker.val(), function(cities){
+                    map2.setMarks(cities.map(x => maps.createMark(x.latlon, x.name, colors.pickColor(x.temp), x.temp)), false);
                 });
-            });
+            };
+            dom.monthPicker.change(rebound);
+            map2.boundsChange(rebound);
+            rebound();
         });
 });

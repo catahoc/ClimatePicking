@@ -6,6 +6,7 @@ define(["jquery"], function ($) {
         leftCity: $('#leftCity'),
         rightCity: $('#rightCity'),
         midPane: $('.midPane'),
-        canvasHolder: $('#chartHolder')
+        canvasHolder: $('#chartHolder'),
+        monthPicker: $('#monthPicker')
     };
 });

@@ -82,7 +82,7 @@ namespace ClimatePicking.Endpoint.Controllers
                 lon1 = lon2;
                 lon2 = b;
             }
-            var matchingCities = context.Cities.Where(x => x.Lat > lat1 && x.Lat < lat2 && x.Lon > lon1 && x.Lon < lon2).Select(x =>
+            var matchingCities = context.Cities.Where(x => x.Lat > lat1 && x.Lat < lat2 && x.Lon > lon1 && x.Lon < lon2).Take(25).Select(x =>
                 new
                 {
                     name = x.Name,

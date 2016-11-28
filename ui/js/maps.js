@@ -6,9 +6,10 @@ define(["ymaps"], function (ymaps, id) {
         promise: new Promise(function(resolve){
             ymaps.ready(resolve);
         }),
-        createMark: function(latlon, name, color){
+        createMark: function(latlon, name, color, temp){
             return new ymaps.Placemark(latlon, {
-                hintContent: name
+                hintContent: name,
+                iconContent: temp
             }, {
                 iconColor: color });
         },
@@ -33,6 +34,9 @@ define(["ymaps"], function (ymaps, id) {
                     map.events.add('boundschange', function(event){
                         callback(event.get('newBounds'));
                     });
+                },
+                getBounds: function(){
+                    return map.getBounds();
                 }
             }
         }
