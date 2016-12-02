@@ -5,6 +5,8 @@ define(["jquery"], function ($) {
     let endpoint = 'http://192.168.1.33:10800';
     let compareTempAppendix = 'api/Climate/CompareTemp';
     let searchInBounds = 'api/Climate/SearchInBounds';
+    let matchingCities = 'api/Climate/MatchingCities';
+    let validateCityName = 'api/Climate/ValidateCityName';
     let getCitiesAppendix = 'api/Climate/Cities';
     let findCitiesAppendix = 'api/Climate/FindCities';
     return {
@@ -26,6 +28,14 @@ define(["jquery"], function ($) {
                 lon2: newBounds[1][1],
                 month: month
             }, callback)
+        },
+        requestMatchingCities: function(months, callback){
+            var serverFormatMonths = months.map(x => {
+                return {Name: x.name, Weather: x.weather, Index: x.index};
+            });
+            $.post(endpoint + '/' + matchingCities, {Restrictions: serverFormatMonths}).done(function(response){
+                callback(response);
+            });
         }
     };
 });

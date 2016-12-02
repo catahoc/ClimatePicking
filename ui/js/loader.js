@@ -1,4 +1,4 @@
-define(["jquery", "maps"], function($, maps){
+define(["jquery", "maps", "jquery-ui"], function($, maps, _){
     let jqueryPromise = new Promise(function(resolve){
         $(resolve);
     });

@@ -42,6 +42,7 @@ define(["jquery"], function($){
     };
     return [
         module.init("city-comparer.htm", "city-comparer", "City Comparer"),
+        module.init("city-picker.htm", "city-picker", "City Picker"),
         module.init("climate-map.htm", "climate-map", "Climate Map")
     ];
 });

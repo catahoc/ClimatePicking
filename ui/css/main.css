@@ -47,18 +47,56 @@ footer{
 }
 
 .rightPane{
-    float: right;
     width: 200px;
 }
 
 .midPane{
     min-height: 400px;
     background-color: #ffeedd;
-    float: right;
-    display: block;
 }
 
 .leftPane{
 
     width: 200px;
+}
+
+.menu-item{
+    padding: 10px;
+    background-color: chartreuse;
+    border: 2px solid #aaffaa;
+    min-width: 150px;
+    font-size: 16pt;
+    margin: 50px;
+}
+
+.menu-item:hover{
+    cursor: pointer;
+    background-color: #aaffaa;
+}
+
+.slider-control{
+    width: 30px;
+    height: 33px;
+    margin: 3px;
+}
+
+.slider-disabled{
+    background-image: url(../img/disabled.png);
+}
+.slider-enabled{
+    background-image: url(../img/enabled.png);
+}
+.slider-enabled:hover{
+    cursor: pointer;
+}
+.slider{
+    width: 200px;
+    min-width: 200px;
+}
+.month-temp-picker{
+    border: 1px solid black;
+    padding: 5px;
+}
+.month-name{
+    margin: 5px;
 }

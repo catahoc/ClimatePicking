@@ -25,29 +25,39 @@ namespace ClimatePicking.Endpoint.Controllers
             var baseCity = context.Cities.FirstOrDefault(x => x.Name == baseCityName);
             var quotedCity = context.Cities.FirstOrDefault(x => x.Name == quotedCityName);
 
+            return CreateChartData(baseCity, quotedCity);
+        }
+
+        private object CreateChartData(CityDto baseCity, CityDto quotedCity)
+        {
+            return CreateChartData(baseCity, quotedCity);
+        }
+
+        private object CreateChartData(CityDto[] cities)
+        {
             var chartData = new
             {
-                labels = baseCity.Entries.Select(x => x.Month).ToArray(),
-                datasets = new[]
+                labels = cities[0].Entries.Select(x => x.Month).ToArray(),
+                datasets = cities.Select(x => new
                 {
+                    label = x.Name,
+                    data = x.Entries.Select(y => y.AvgMin).ToArray()
+                }).ToArray()
+            };
+            var citiesData = cities.Select(x => new {x.Name, latlon = new[] {x.Lat, x.Lon}}).ToArray();
+            return
+                Json(
                     new
                     {
-                        label = baseCityName,
-                        data = baseCity.Entries.Select(x => x.AvgMin).ToArray()
-                    },
-                    new
-                    {
-                        label = quotedCityName,
-                        data = quotedCity.Entries.Select(x => x.AvgMin).ToArray()
-                    },
-                }
-            };
-            var citiesData = new
-            {
-                baseCity = new {baseCity.Name, latlon = new[] {baseCity.Lat, baseCity.Lon}},
-                quotedCity = new { quotedCity.Name, latlon = new[] { quotedCity.Lat, quotedCity.Lon}}
-            };
-            return Json(new { chartData, citiesData, bounds = new[] { new[] { baseCity.Lat, baseCity.Lon } , new[] { quotedCity.Lat, quotedCity.Lon } } });
+                        chartData,
+                        citiesData,
+                    });
+        }
+
+        [HttpPost]
+        public object MatchingCities(NatchingCitiesArgs arg)
+        {
+            return CreateChartData(context.Cities.OrderBy(x => ComputeCloseness(x, arg.Restrictions)).Take(5).ToArray());
         }
 
         [HttpGet]
@@ -91,6 +101,24 @@ namespace ClimatePicking.Endpoint.Controllers
                 }).ToArray();
 
             return Json(matchingCities);
+        }
+
+        private double ComputeCloseness(CityDto city, MonthRestriction[] restrictions)
+        {
+            var closeness = 0.0;
+            foreach (var restriction in restrictions)
+            {
+                var record = city.Entries?.FirstOrDefault(x => x.MonthIndex == restriction.Index);
+                if (record == null)
+                {
+                    closeness += 100;
+                }
+                else
+                {
+                    closeness += Math.Abs(record.AvgMin - restriction.Weather);
+                }
+            }
+            return closeness;
         }
     }
 }
