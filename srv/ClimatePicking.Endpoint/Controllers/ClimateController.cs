@@ -44,7 +44,7 @@ namespace ClimatePicking.Endpoint.Controllers
                     data = x.Entries.Select(y => y.AvgMin).ToArray()
                 }).ToArray()
             };
-            var citiesData = cities.Select(x => new {x.Name, latlon = new[] {x.Lat, x.Lon}}).ToArray();
+            var citiesData = cities.Select(x => new {name = x.Name, latlon = new[] {x.Lat, x.Lon}}).ToArray();
             return
                 Json(
                     new

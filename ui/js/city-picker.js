@@ -28,22 +28,21 @@ define(["jquery", "server", "charts", "maps"], function($, server, charts, maps)
                 let slider = monthTempPicker.find('.slider').slider({
                     min: -50,
                     max: 50,
+                    orientation: "vertical",
                     slide: function(){
                         month.weather = slider.slider("value");
-                        //$(this).next('.slider-control').removeClass('slider-disabled').addClass('slider-enabled');
                         enabler.removeClass('slider-disabled').addClass('slider-enabled');
-                        monthName.html(month.name + ' - ' + month.weather)
+                        slider.find('.ui-slider-handle').html(month.weather);
                     }
                 });
                 enabler.click(function(){
                     if(enabler.hasClass('slider-enabled')){
                         month.weather = undefined;
-                        //$(this).removeClass('slider-enabled').addClass('slider-disabled');
                         enabler.removeClass('slider-enabled').addClass('slider-disabled');
-                        monthName.html(month.name + ' - any');
+                        slider.find('.ui-slider-handle').html(month.weather);
                     }
                 });
-                monthName.html(month.name + ' - any');
+                monthName.html(month.name);
             });
             monthTempPickerProto.hide();
             findCityBtn.click(function(){

@@ -90,13 +90,31 @@ footer{
     cursor: pointer;
 }
 .slider{
-    width: 200px;
-    min-width: 200px;
+    height: 200px;
+    display: block;
+    margin: auto;
 }
 .month-temp-picker{
     border: 1px solid black;
     padding: 5px;
+    float: left;
+}
+#month-temp-pickers{
+    min-height: 200px;
 }
 .month-name{
     margin: 5px;
+}
+#find-city{
+    cursor: pointer;
+    padding: 5px;
+    background-color: #003eff;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+}
+#find-city:hover{
+    background-color: #006eff;
+}
+.floating{
+    float: left;
 }
