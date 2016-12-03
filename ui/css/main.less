@@ -1,3 +1,10 @@
+//colors
+@fill-general: #ffffff;
+@stroke-general: #552222;
+@fill-accent: #aabbcc;
+@fill-accent-hover: desaturate(@fill-accent, 30%);
+@top-border: #222244;
+
 *, .navItem {
   border: 0;
   padding: 0;
@@ -5,8 +12,8 @@
 }
 
 body {
-  background-color: #eeeeee;
-  color: #222244;
+  background-color: @fill-general;
+  color: @stroke-general;
   align-content: stretch;
 }
 
@@ -22,23 +29,12 @@ footer{
   align-content: left;
   text-align: left;
   padding: 20px 0 20px 20px;
-  border-top: 1px solid #222244;
+  border-top: 1px solid @top-border;
   margin: 0 20px;
 }
 
 #middle{
   min-height: 400px;
-}
-
-.navItem{
-  display: block;
-  padding: 10px 0 10px 20px;
-  width: 200px;
-  border: 1px solid #CCCCCC;
-}
-
-.navItem:hover{
-  background-color: #CCCCCC;
 }
 
 .citySelector{
@@ -52,7 +48,6 @@ footer{
 
 .midPane{
   min-height: 400px;
-  background-color: #ffeedd;
 }
 
 .leftPane{
@@ -60,18 +55,20 @@ footer{
   width: 200px;
 }
 
-.menu-item{
+.button{
+  cursor: pointer;
   padding: 10px;
-  background-color: chartreuse;
-  border: 2px solid #aaffaa;
+  background-color: @fill-accent;
   min-width: 150px;
   font-size: 16pt;
   margin: 50px;
+  &:hover{
+    background-color: @fill-accent-hover;
+  }
 }
 
-.menu-item:hover{
-  cursor: pointer;
-  background-color: #aaffaa;
+.menu-item{
+  .button;
 }
 
 .slider-control{
@@ -106,17 +103,9 @@ footer{
   margin: 5px;
 }
 #find-city{
-  cursor: pointer;
-  padding: 5px;
-  background-color: #003eff;
-  color: rgb(255, 255, 255);
-  font-weight: 400;
+  .button;
 }
-#find-city:hover{
-  background-color: #006eff;
-}
+
 .floating{
   float: left;
 }
-
-.other{}
