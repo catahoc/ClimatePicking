@@ -1,120 +1,106 @@
-*, .navItem {
-    border: 0;
-    padding: 0;
-    margin: 0;
+*,
+.navItem {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
-
 body {
-    background-color: #eeeeee;
-    color: #222244;
-    align-content: stretch;
+  background-color: #eeeeee;
+  color: #222244;
+  align-content: stretch;
 }
-
 header {
-    font-size: 20pt;
-    align-content: center;
-    text-align: center;
-    padding: 20px 0;
+  font-size: 20pt;
+  align-content: center;
+  text-align: center;
+  padding: 20px 0;
 }
-
-footer{
-    font-size: 16pt;
-    align-content: left;
-    text-align: left;
-    padding: 20px 0 20px 20px;
-    border-top: 1px solid #222244;
-    margin: 0 20px;
+footer {
+  font-size: 16pt;
+  align-content: left;
+  text-align: left;
+  padding: 20px 0 20px 20px;
+  border-top: 1px solid #222244;
+  margin: 0 20px;
 }
-
-#middle{
-    min-height: 400px;
+#middle {
+  min-height: 400px;
 }
-
-.navItem{
-    display: block;
-    padding: 10px 0 10px 20px;
-    width: 200px;
-    border: 1px solid #CCCCCC;
+.navItem {
+  display: block;
+  padding: 10px 0 10px 20px;
+  width: 200px;
+  border: 1px solid #CCCCCC;
 }
-
-.navItem:hover{
-    background-color: #CCCCCC;
+.navItem:hover {
+  background-color: #CCCCCC;
 }
-
-.citySelector{
-    padding: 10px;
-    font-size: 12pt;
+.citySelector {
+  padding: 10px;
+  font-size: 12pt;
 }
-
-.rightPane{
-    width: 200px;
+.rightPane {
+  width: 200px;
 }
-
-.midPane{
-    min-height: 400px;
-    background-color: #ffeedd;
+.midPane {
+  min-height: 400px;
+  background-color: #ffeedd;
 }
-
-.leftPane{
-
-    width: 200px;
+.leftPane {
+  width: 200px;
 }
-
-.menu-item{
-    padding: 10px;
-    background-color: chartreuse;
-    border: 2px solid #aaffaa;
-    min-width: 150px;
-    font-size: 16pt;
-    margin: 50px;
+.menu-item {
+  padding: 10px;
+  background-color: chartreuse;
+  border: 2px solid #aaffaa;
+  min-width: 150px;
+  font-size: 16pt;
+  margin: 50px;
 }
-
-.menu-item:hover{
-    cursor: pointer;
-    background-color: #aaffaa;
+.menu-item:hover {
+  cursor: pointer;
+  background-color: #aaffaa;
 }
-
-.slider-control{
-    width: 30px;
-    height: 33px;
-    margin: 3px;
+.slider-control {
+  width: 30px;
+  height: 33px;
+  margin: 3px;
 }
-
-.slider-disabled{
-    background-image: url(../img/disabled.png);
+.slider-disabled {
+  background-image: url(../img/disabled.png);
 }
-.slider-enabled{
-    background-image: url(../img/enabled.png);
+.slider-enabled {
+  background-image: url(../img/enabled.png);
 }
-.slider-enabled:hover{
-    cursor: pointer;
+.slider-enabled:hover {
+  cursor: pointer;
 }
-.slider{
-    height: 200px;
-    display: block;
-    margin: auto;
+.slider {
+  height: 200px;
+  display: block;
+  margin: auto;
 }
-.month-temp-picker{
-    border: 1px solid black;
-    padding: 5px;
-    float: left;
+.month-temp-picker {
+  border: 1px solid black;
+  padding: 5px;
+  float: left;
 }
-#month-temp-pickers{
-    min-height: 200px;
+#month-temp-pickers {
+  min-height: 200px;
 }
-.month-name{
-    margin: 5px;
+.month-name {
+  margin: 5px;
 }
-#find-city{
-    cursor: pointer;
-    padding: 5px;
-    background-color: #003eff;
-    color: rgb(255, 255, 255);
-    font-weight: 400;
+#find-city {
+  cursor: pointer;
+  padding: 5px;
+  background-color: #003eff;
+  color: #ffffff;
+  font-weight: 400;
 }
-#find-city:hover{
-    background-color: #006eff;
+#find-city:hover {
+  background-color: #006eff;
 }
-.floating{
-    float: left;
+.floating {
+  float: left;
 }
