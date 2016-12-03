@@ -1,9 +1,12 @@
 //colors
-@fill-general: #ffffff;
 @stroke-general: #552222;
-@fill-accent: #aabbcc;
-@fill-accent-hover: desaturate(@fill-accent, 30%);
+@fill-control: #aabbcc;
+@fill-control-hover: lighten(@fill-control, 10%);
 @top-border: #222244;
+@fill-general: lighten(@fill-control, 20%);
+
+@img-enabled: "../img/enabled.png";
+@img-disabled: "../img/disabled.png";
 
 *, .navItem {
   border: 0;
@@ -58,34 +61,38 @@ footer{
 .button{
   cursor: pointer;
   padding: 10px;
-  background-color: @fill-accent;
+  background-color: @fill-control;
   min-width: 150px;
   font-size: 16pt;
   margin: 50px;
   &:hover{
-    background-color: @fill-accent-hover;
+    background-color: @fill-control-hover;
   }
 }
 
 .menu-item{
   .button;
 }
-
+//
+//.slider-control{
+//  width: 30px;
+//  height: 33px;
+//  margin: 3px;
+//}
 .slider-control{
-  width: 30px;
-  height: 33px;
+  width: image-width(@img-enabled);
+  height: image-width(@img-disabled);
   margin: 3px;
 }
 
 .slider-disabled{
-  background-image: url(../img/disabled.png);
+  background-image: url(@img-disabled);
 }
 .slider-enabled{
-  background-image: url(../img/enabled.png);
-}
-.slider-enabled:hover{
+  background-image: url(@img-enabled);
   cursor: pointer;
 }
+
 .slider{
   height: 200px;
   display: block;
