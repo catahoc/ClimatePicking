@@ -30,7 +30,7 @@ namespace ClimatePicking.Endpoint.Controllers
 
         private object CreateChartData(CityDto baseCity, CityDto quotedCity)
         {
-            return CreateChartData(baseCity, quotedCity);
+            return CreateChartData(new[] { baseCity, quotedCity });
         }
 
         private object CreateChartData(CityDto[] cities)
