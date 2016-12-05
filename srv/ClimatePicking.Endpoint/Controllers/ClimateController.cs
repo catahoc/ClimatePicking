@@ -57,7 +57,7 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpPost]
         public object MatchingCities(NatchingCitiesArgs arg)
         {
-            return CreateChartData(context.Cities.OrderBy(x => ComputeCloseness(x, arg.Restrictions)).Take(5).ToArray());
+            return CreateChartData(context.Cities.ToArray().OrderBy(x => ComputeCloseness(x, arg.Restrictions)).Take(5).ToArray());
         }
 
         [HttpGet]
@@ -72,7 +72,7 @@ namespace ClimatePicking.Endpoint.Controllers
         [HttpGet]
         public object FindCities(string term)
         {
-            var cities = context.Cities.Where(x => x.Name.StartsWith(term, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Name).ToArray();
+            var cities = context.Cities.Where(x => x.Name.ToLower().Contains(term.ToLower())).Select(x => x.Name).ToArray();
 
             return Json(cities);
         }
@@ -92,7 +92,7 @@ namespace ClimatePicking.Endpoint.Controllers
                 lon1 = lon2;
                 lon2 = b;
             }
-            var matchingCities = context.Cities.Where(x => x.Lat > lat1 && x.Lat < lat2 && x.Lon > lon1 && x.Lon < lon2).Take(25).Select(x =>
+            var matchingCities = context.Cities.Where(x => x.Lat > lat1 && x.Lat < lat2 && x.Lon > lon1 && x.Lon < lon2).Take(25).ToArray().Select(x =>
                 new
                 {
                     name = x.Name,

@@ -13,7 +13,7 @@ namespace ClimatePicking.DataRetriever
     {
         static void Main(string[] args)
         {
-            SaveDbJson.Do();
+            PusherToMongo.Do();
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿namespace ClimatePicking.Endpoint.Models
+﻿using System.Linq;
+
+namespace ClimatePicking.Endpoint.Models
 {
     public interface IDataSource
     {
-        CityDto[] Cities { get; }
+        IQueryable<CityDto> Cities { get; }
     }
 }

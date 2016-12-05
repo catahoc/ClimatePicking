@@ -20,7 +20,7 @@ namespace ClimatePicking.Endpoint
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
             container.RegisterType<IModelsConverter, ModelsConverter>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IDataSource, JsonDataSource>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IDataSource, MongoDataSource>(new ContainerControlledLifetimeManager());
         }
     }
 }
