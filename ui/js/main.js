@@ -5,7 +5,8 @@ require.config({
     paths: {
         'jquery': 'util/jquery',
         'jquery-ui': 'util/jquery-ui',
-        'ymaps': '//api-maps.yandex.ru/2.1/?lang=ru-RU'
+        'ymaps': '//api-maps.yandex.ru/2.1/?lang=ru-RU',
+        'bootstrap': 'util/bootstrap'
     },
     urlArgs: "bust=" + (new Date()).getTime(),
 
@@ -15,12 +16,13 @@ require.config({
         },
         ymaps: {
             exports: 'ymaps'
-        }
+        },
+        bootstrap : { "deps" :['jquery'] }
     }
 
 });
 
-requirejs(["jquery", "loader", "modules"], function ($, loader, modules) {
+requirejs(["jquery", "loader", "modules", "bootstrap"], function ($, loader, modules, _) {
     loader.then(function(){
         let loading = $('#loading');
         loading.hide();
@@ -28,7 +30,7 @@ requirejs(["jquery", "loader", "modules"], function ($, loader, modules) {
         let content = $('#content');
         let loadingModule = undefined;
         $.each(modules, function(_, module){
-            $('<span class="menu-item">').appendTo(menu).html(module.name).click(() => {
+            $('<a class="btn">').appendTo(menu).html(module.name).click(() => {
                 loading.show();
                 content.hide();
                 if(loadingModule != undefined){

@@ -8,7 +8,7 @@
 @img-enabled: "../img/enabled.png";
 @img-disabled: "../img/disabled.png";
 
-*, .navItem {
+* {
   border: 0;
   padding: 0;
   margin: 0;
@@ -54,65 +54,23 @@ footer{
 }
 
 .leftPane{
-
   width: 200px;
+}
+#content{
+  //clear: left;
 }
 
 .button{
-  cursor: pointer;
-  padding: 10px;
-  background-color: @fill-control;
-  min-width: 150px;
-  font-size: 16pt;
-  margin: 50px;
-  &:hover{
-    background-color: @fill-control-hover;
-  }
+  //cursor: pointer;
+  //padding: 10px;
+  //background-color: @fill-control;
+  //min-width: 150px;
+  //font-size: 16pt;
+  //&:hover{
+  //  background-color: @fill-control-hover;
+  //}
 }
 
 .menu-item{
   .button;
-}
-//
-//.slider-control{
-//  width: 30px;
-//  height: 33px;
-//  margin: 3px;
-//}
-.slider-control{
-  width: image-width(@img-enabled);
-  height: image-width(@img-disabled);
-  margin: 3px;
-}
-
-.slider-disabled{
-  background-image: url(@img-disabled);
-}
-.slider-enabled{
-  background-image: url(@img-enabled);
-  cursor: pointer;
-}
-
-.slider{
-  height: 200px;
-  display: block;
-  margin: auto;
-}
-.month-temp-picker{
-  border: 1px solid black;
-  padding: 5px;
-  float: left;
-}
-#month-temp-pickers{
-  min-height: 200px;
-}
-.month-name{
-  margin: 5px;
-}
-#find-city{
-  .button;
-}
-
-.floating{
-  float: left;
 }

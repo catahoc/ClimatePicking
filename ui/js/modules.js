@@ -3,10 +3,11 @@
  */
 define(["jquery"], function($){
     let module = {
-        init: function(page, moduleName, name){
+        init: function(page, style, moduleName, name){
             return {
                 page: page,
                 moduleName: moduleName,
+                style: style,
                 name: name,
                 loaded: false,
                 interrupt: false,
@@ -41,8 +42,8 @@ define(["jquery"], function($){
         }
     };
     return [
-        module.init("city-comparer.htm", "city-comparer", "City Comparer"),
-        module.init("city-picker.htm", "city-picker", "City Picker"),
-        module.init("climate-map.htm", "climate-map", "Climate Map")
+        module.init("city-comparer.htm", "city-comparer.css", "city-comparer", "City Comparer"),
+        module.init("city-picker.htm", "city-picker.css", "city-picker", "City Picker"),
+        module.init("climate-map.htm", "climate-map.css", "climate-map", "Climate Map")
     ];
 });
