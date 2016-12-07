@@ -1,18 +1,17 @@
-<div>
-    <div class="month-temp-picker-proto">
+<div class="container">
+    <div class="month-temp-picker-proto col-md-1">
         <div class="month-name"></div>
         <div class="slider"></div>
         <div class="slider-disabled slider-control"></div>
     </div>
-    <div id="month-temp-pickers">
-
-    </div>
-    <span id="find-city">Find city matching picked climate...</span>
-    <div>
-        <div id="find-city-result" style="width: 600px;">
+    <div class="row">
+        <div id="month-temp-pickers" class="row col-md-6">
 
         </div>
-        <div id="map" style="width: 600px; height: 400px"></div>
     </div>
-
+    <button id="find-city" class="btn-primary">Find city...</button>
+    <div class="row">
+        <div id="find-city-result" class="col-md-6 chart"></div>
+        <div id="map" class="col-md-6 ymap"></div>
+    </div>
 </div>

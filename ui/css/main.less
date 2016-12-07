@@ -1,3 +1,24 @@
 #content{
 padding-top: 50px;
 }
+
+@ymap-height: 400px;
+.ymap{
+  max-height: @ymap-height;
+  height: @ymap-height;
+  min-height: @ymap-height;
+}
+
+@chart-height: 400px;
+.chart{
+  max-height: @chart-height;
+  height: @chart-height;
+  min-height: @chart-height;
+}
+
+@slider-size: 20px;
+
+.ui-slider .ui-slider-handle{
+  width: @slider-size;
+  height: @slider-size;
+}
