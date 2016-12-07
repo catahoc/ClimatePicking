@@ -1,7 +1,7 @@
-define(["server", "charts", "jquery", "maps"],
-    function (server, charts, $, maps) {
+define(["server", "charts", "jquery", "maps", "url-utils"],
+    function (server, charts, $, maps, urlUtils) {
         return {
-            load: function () {
+            load: function (args) {
                 let myMap = maps.createMap('map');
                 let selected = {
                     left: false,
@@ -10,6 +10,11 @@ define(["server", "charts", "jquery", "maps"],
                     rightName: ''
                 };
                 let startCompareByNames = function (leftName, rightName) {
+                    urlUtils.setUrl({
+                        module: "City Comparer",
+                        left: leftName,
+                        right: rightName
+                    });
                     server.compareTemp(leftName, rightName, function (response) {
 
                         // chart
@@ -46,7 +51,12 @@ define(["server", "charts", "jquery", "maps"],
                         }
                     }
                 });
-                startCompareByNames('Moscow', 'London');
+                if(("left" in args) && ("right" in args))
+                {
+                    $('#leftCity').val(args.left);
+                    $('#rightCity').val(args.right);
+                    startCompareByNames(args.left, args.right);
+                }
             }
         };
     });

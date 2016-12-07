@@ -11,14 +11,14 @@ define(["jquery"], function($){
                 name: name,
                 loaded: false,
                 interrupt: false,
-                load: function(content){
+                load: function(content, args){
                     let moduleCopy = this;
                     let loadHtml = new Promise(resolve => $.get(this.page, loaded => resolve(loaded)));
                     let loadModule = new Promise(resolve => require([this.moduleName], resolve));
                     this.interrupt = false;
                     let setup = function(){
                         content.html(moduleCopy.html);
-                        moduleCopy.moduleObject.load();
+                        moduleCopy.moduleObject.load(args);
                     };
                     return new Promise(resolve => {
                         if(!this.loaded){
