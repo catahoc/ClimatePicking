@@ -11,18 +11,18 @@ require.config({
     urlArgs: "bust=" + (new Date()).getTime(),
 
     shim: {
-        jquery: {
-            exports: "$"
-        },
-        ymaps: {
+        // jquery: {
+        //     exports: "$"
+        // },
+        "ymaps": {
             exports: 'ymaps'
         },
-        bootstrap : { "deps" :['jquery'] }
+        "bootstrap" : { "deps" :['jquery'] }
     }
 
 });
 
-requirejs(["jquery", "loader", "modules", "bootstrap"], function ($, loader, modules, _) {
+requirejs(["jquery", "loader", "modules", "bootstrap"], function ($, loader, modules) {
     loader.then(function(){
         let loading = $('#loading');
         loading.hide();
@@ -30,7 +30,8 @@ requirejs(["jquery", "loader", "modules", "bootstrap"], function ($, loader, mod
         let content = $('#content');
         let loadingModule = undefined;
         $.each(modules, function(_, module){
-            $('<a class="btn">').appendTo(menu).html(module.name).click(() => {
+            let li = $('<li/>').appendTo(menu);
+            $('<a href="javascript:;"/>').appendTo(li).html(module.name).click(() => {
                 loading.show();
                 content.hide();
                 if(loadingModule != undefined){
