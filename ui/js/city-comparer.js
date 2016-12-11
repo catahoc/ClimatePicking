@@ -2,19 +2,10 @@ define(["server", "charts", "jquery", "maps", "url-utils"],
     function (server, charts, $, maps, urlUtils) {
         return {
             load: function (args) {
+                let leftCity = $('#leftCity');
+                let rightCity = $('#rightCity');
                 let myMap = maps.createMap('map');
-                let selected = {
-                    left: false,
-                    leftName: '',
-                    right: false,
-                    rightName: ''
-                };
                 let startCompareByNames = function (leftName, rightName) {
-                    urlUtils.setUrl({
-                        module: "City Comparer",
-                        left: leftName,
-                        right: rightName
-                    });
                     server.compareTemp(leftName, rightName, function (response) {
 
                         // chart
@@ -23,38 +14,44 @@ define(["server", "charts", "jquery", "maps", "url-utils"],
                         chart.render(chartData);
 
                         // map
-                        var citiesData = response.citiesData;
+                        let citiesData = response.citiesData;
                         myMap.setMarks(citiesData.map(x => maps.createMark(x.latlon, x.name)), true);
                     });
                 };
-                $('#leftCity').autocomplete({
+                leftCity.autocomplete({
                     source: server.searchCities,
                     minLength: 2,
                     delay: 300,
                     select: function (data, value) {
-                        selected.left = true;
-                        selected.leftName = value.item.value;
-                        if (selected.right) {
-                            startCompareByNames(selected.leftName, selected.rightName);
+                        args.left = value.item.value;
+                        urlUtils.setUrl(args);
+                        if (args.right) {
+                            startCompareByNames(args.left, args.right);
                         }
                     }
                 });
-                $('#rightCity').autocomplete({
+                rightCity.autocomplete({
                     source: server.searchCities,
                     minLength: 2,
                     delay: 300,
                     select: function (data, value) {
-                        selected.right = true;
-                        selected.rightName = value.item.value;
-                        if (selected.left) {
-                            startCompareByNames(selected.leftName, selected.rightName);
+                        args.right = value.item.value;
+                        urlUtils.setUrl(args);
+                        if (args.left) {
+                            startCompareByNames(args.left, args.right);
                         }
                     }
                 });
-                if(("left" in args) && ("right" in args))
+                if(args.left)
                 {
-                    $('#leftCity').val(args.left);
-                    $('#rightCity').val(args.right);
+                    leftCity.val(args.left);
+                }
+                if(args.right)
+                {
+                    rightCity.val(args.right);
+                }
+                if(args.left && args.right)
+                {
                     startCompareByNames(args.left, args.right);
                 }
             }

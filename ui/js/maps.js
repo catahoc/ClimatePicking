@@ -37,6 +37,9 @@ define(["ymaps"], function (ymaps, id) {
                 },
                 getBounds: function(){
                     return map.getBounds();
+                },
+                setBounds: function(bounds){
+                    return map.setBounds(bounds);
                 }
             }
         }
